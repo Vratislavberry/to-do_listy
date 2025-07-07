@@ -1,11 +1,11 @@
 "use client";
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { Note } from "../types";
+import { Note, NoteDto} from "../types";
 import FetchHelper from "../fetchHelper";
 
 interface NoteListDto {
   state: "ready" | "pending" | "error";
-  data: any;
+  data: Note[] | null;
   error: any;
   // handlerMap?: { ... }
 }
@@ -46,10 +46,37 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     });
   }
 
-  // to launch load on visiting the Child component (Dashboard)
+  // to launch load on visiting the Child component (notesUI)
   useEffect(() => {
     handleLoad();
   }, []);
+
+/*
+async function handleCreate(dtoIn: NoteDto) {
+    setNoteListDto((current) => {
+      return { ...current, state: "pending" };
+    });
+    const result = await FetchHelper.note.create(dtoIn);
+    setNoteListDto((current) => {
+      if (result.ok) {
+        current.data.itemList.push(result.data);
+        // returns deep copy of current
+        return {
+          ...current, // Keeps all existing properties
+          state: "ready", // Updates the state property
+          // Updates the data property
+          data: { ...current.data, itemList: current.data.itemList.slice() },
+          error: null, // Resets the error property
+        };
+      } else {
+        // state needs to be ready on error or no data is shown
+        return { ...current, state: "ready", error: result.data };
+      }
+    });
+    return { ok: result.ok, error: result.ok ? undefined : result.data };
+  }
+*/
+
 
   const value = {
     ...noteListDto,

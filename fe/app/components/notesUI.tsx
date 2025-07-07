@@ -5,6 +5,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import { Note, NoteDto } from "../types";
 
 import { NoteListContext } from "./notesProvider";
+import PendingItem from "./pendingItem";
 
 const NotesUI = () => {
   const context = useContext(NoteListContext);
@@ -70,58 +71,73 @@ const NotesUI = () => {
   }, []);
 
   return (
-    <Row>
-      {noteList.map((note) => (
-        <Col sm="4" key={note.id}>
-          {note.title}
-        </Col>
-      ))}
-      <Button
-        onClick={() => {
-          createNote({
-            title: "Created Note",
-            createdAt: "2023-10-02T12:00:00Z",
-            updatedAt: "2023-10-02T12:00:00Z",
-          });
-        }}
-      >
-        Create
-      </Button>
+    <>
+      <Row>
+        {noteList.map((note) => (
+          <Col sm="4" key={note.id}>
+            {note.title}
+          </Col>
+        ))}
+        <Button
+          onClick={() => {
+            createNote({
+              title: "Created Note",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Create
+        </Button>
 
-      <Button
-        onClick={() => {
-          updateNote({
-            id: "408c",
-            title: "Updated Note 2",
-            createdAt: "2023-10-02T12:00:00Z",
-            updatedAt: "2023-10-02T12:00:00Z",
-          });
-        }}
-      >
-        Update
-      </Button>
+        <Button
+          onClick={() => {
+            updateNote({
+              id: "408c",
+              title: "Updated Note 2",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Update
+        </Button>
 
-      <Button
-        onClick={() => {
-          deleteNote({
-            id: "f05f",
-            title: "Updated Note 2",
-            createdAt: "2023-10-02T12:00:00Z",
-            updatedAt: "2023-10-02T12:00:00Z",
-          });
-        }}
-      >
-        Delete
-      </Button>
+        <Button
+          onClick={() => {
+            deleteNote({
+              id: "f05f",
+              title: "Updated Note 2",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Delete
+        </Button>
 
-      <Button
-        onClick={() => {
-          console.log("Logging data:", state, data);
-        }}
-      >
-        log data
-      </Button>
-    </Row>
+        <Button
+          onClick={() => {
+            console.log("Logging data:", state, data);
+          }}
+        >
+          log data
+        </Button>
+      </Row>
+
+      <Row>
+        <p>Nová data:</p>
+        {state === "pending" ? <PendingItem /> : null}
+
+        {state === "ready"
+          ? data?.map((note) => (
+              <Col sm="4" key={note.id}>
+                {note.title}
+              </Col>
+            ))
+          : null}
+      </Row>
+    </>
   );
 };
 
