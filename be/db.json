@@ -1,34 +1,39 @@
 {
-    "notes": [
-        {
-            "id": 1,
-            "title": "First Note",
-            "createdAt": "2023-10-01T12:00:00Z",
-            "updatedAt": "2023-10-01T12:00:00Z"
-        },
-        {
-            "id": 2,
-            "title": "Second Note",
-            "createdAt": "2023-10-02T12:00:00Z",
-            "updatedAt": "2023-10-02T12:00:00Z"
-        }
-    ],
-    "entries": [
-        {
-            "id": 1,
-            "noteId": 1,
-            "content": "This is the first entry in the first note."
-        },
-        {
-            "id": 2,
-            "noteId": 1,
-            "content": "This is the second entry in the first note."
-        },
-        {
-            "id": 3,
-            "noteId": 2,
-            "content": "This is the first entry in the second note."
-        }
-    ]
-
+  "notes": [
+    {
+      "id": "1",
+      "title": "First Note",
+      "createdAt": "2023-10-01T12:00:00Z",
+      "updatedAt": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Second Note",
+      "createdAt": "2023-10-02T12:00:00Z",
+      "updatedAt": "2023-10-02T12:00:00Z"
+    },
+    {
+      "title": "Changed Note",
+      "createdAt": "2023-10-01T12:00:00Z",
+      "updatedAt": "2023-10-01T12:00:00Z",
+      "id": "0654"
+    }
+  ],
+  "entries": [
+    {
+      "id": "1",
+      "noteId": 1,
+      "content": "This is the first entry in the first note."
+    },
+    {
+      "id": "2",
+      "noteId": 1,
+      "content": "This is the second entry in the first note."
+    },
+    {
+      "id": "3",
+      "noteId": 2,
+      "content": "This is the first entry in the second note."
+    }
+  ]
 }
