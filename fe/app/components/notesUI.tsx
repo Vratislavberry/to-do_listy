@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FetchHelper from "../fetchHelper";
 import { Row, Col, Button } from "react-bootstrap";
 import { Note, NoteDto } from "../types";
 
-
+import { NoteListContext } from "./notesProvider";
 
 const NotesUI = () => {
+  const context = useContext(NoteListContext);
+  const { state, data } = context ?? { state: "pending", data: [] };
   const [noteList, setNoteList] = useState<Note[]>([
     {
       id: "1",
@@ -110,6 +112,14 @@ const NotesUI = () => {
         }}
       >
         Delete
+      </Button>
+
+      <Button
+        onClick={() => {
+          console.log("Logging data:", state, data);
+        }}
+      >
+        log data
       </Button>
     </Row>
   );
