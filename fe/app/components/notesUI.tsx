@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import FetchHelper from "../fetch-helper";
+import FetchHelper from "../fetchHelper";
 import { Row, Col, Button } from "react-bootstrap";
 import { NoteDto } from "../types";
 
@@ -46,7 +46,17 @@ const NotesUI = () => {
     }
   };
 
-  
+  const updateNote = async (dtoIn: NoteDto) => {
+    const result = await FetchHelper.note.update(dtoIn);
+    if (result.ok) {
+      // Update the note in the list
+      setNoteList((current) =>
+        current.map((note) => (note.id === dtoIn?.id ? result.data : note))
+      );
+    } else {
+      console.error("Error updating note:", result.status);
+    }
+  };
 
   useEffect(() => {
     getNotes();
@@ -69,6 +79,19 @@ const NotesUI = () => {
         }}
       >
         Create
+      </Button>
+
+      <Button
+        onClick={() => {
+          updateNote({
+            id: "76f7",
+            title: "Updated Note",
+            createdAt: "2023-10-02T12:00:00Z",
+            updatedAt: "2023-10-02T12:00:00Z",
+          });
+        }}
+      >
+        Update
       </Button>
     </Row>
   );

@@ -14,10 +14,10 @@ async function Call(baseUri: string, useCase: string, dtoIn: NoteDto | null, met
           : ""
       }`
     );
-  // if method is "POST"
+  // if method is "POST", "PUT" or "DELETE"
   } else {
     response = await fetch(`${baseUri}/${useCase}`, {
-      method: "POST",
+      method: method.toUpperCase(),
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dtoIn),
     });
@@ -28,7 +28,6 @@ async function Call(baseUri: string, useCase: string, dtoIn: NoteDto | null, met
 
 
 
-interface FetchResult {}
 
 const baseUri = "http://localhost:4000";
 const FetchHelper = {
@@ -40,7 +39,7 @@ const FetchHelper = {
       return await Call(baseUri, "notes", null, "get");
     },
     update: async (dtoIn: NoteDto) => {
-      return await Call(baseUri, "notes", dtoIn, "put");
+      return await Call(baseUri, `notes/${dtoIn?.id}`, dtoIn, "put");
     },
     delete: async (dtoIn: NoteDto) => {
       return await Call(baseUri, "notes", dtoIn, "delete");
