@@ -2,14 +2,9 @@
 import { useState, useEffect } from "react";
 import FetchHelper from "../fetchHelper";
 import { Row, Col, Button } from "react-bootstrap";
-import { NoteDto } from "../types";
+import { Note, NoteDto } from "../types";
 
-interface Note {
-  id: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 const NotesUI = () => {
   const [noteList, setNoteList] = useState<Note[]>([
@@ -58,6 +53,16 @@ const NotesUI = () => {
     }
   };
 
+  const deleteNote = async (dtoIn: NoteDto) => {
+    const result = await FetchHelper.note.delete(dtoIn);
+    if (result.ok) {
+      // Remove the note from the list
+      setNoteList((current) => current.filter((note) => note.id !== dtoIn.id));
+    } else {
+      console.error("Error deleting note:", result.status);
+    }
+  };
+
   useEffect(() => {
     getNotes();
   }, []);
@@ -84,14 +89,27 @@ const NotesUI = () => {
       <Button
         onClick={() => {
           updateNote({
-            id: "76f7",
-            title: "Updated Note",
+            id: "408c",
+            title: "Updated Note 2",
             createdAt: "2023-10-02T12:00:00Z",
             updatedAt: "2023-10-02T12:00:00Z",
           });
         }}
       >
         Update
+      </Button>
+
+      <Button
+        onClick={() => {
+          deleteNote({
+            id: "f05f",
+            title: "Updated Note 2",
+            createdAt: "2023-10-02T12:00:00Z",
+            updatedAt: "2023-10-02T12:00:00Z",
+          });
+        }}
+      >
+        Delete
       </Button>
     </Row>
   );

@@ -42,7 +42,7 @@ const FetchHelper = {
       return await Call(baseUri, `notes/${dtoIn?.id}`, dtoIn, "put");
     },
     delete: async (dtoIn: NoteDto) => {
-      return await Call(baseUri, "notes", dtoIn, "delete");
+      return await Call(baseUri, `notes/${dtoIn?.id}`, dtoIn, "delete");
     },
 
   },
