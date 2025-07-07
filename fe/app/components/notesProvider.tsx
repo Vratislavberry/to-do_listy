@@ -7,7 +7,10 @@ interface NoteListDto {
   state: "ready" | "pending" | "error";
   data: Note[] | null;
   error: any;
-  // handlerMap?: { ... }
+  handlerMap?: {
+    handleLoad: () => Promise<void>;
+    handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
+  };
 }
 
 export const NoteListContext = createContext<NoteListDto | undefined>(
@@ -51,7 +54,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     handleLoad();
   }, []);
 
-/*
+
 async function handleCreate(dtoIn: NoteDto) {
     setNoteListDto((current) => {
       return { ...current, state: "pending" };
@@ -59,13 +62,13 @@ async function handleCreate(dtoIn: NoteDto) {
     const result = await FetchHelper.note.create(dtoIn);
     setNoteListDto((current) => {
       if (result.ok) {
-        current.data.itemList.push(result.data);
+        //current?.data?.push(result.data);
         // returns deep copy of current
         return {
           ...current, // Keeps all existing properties
           state: "ready", // Updates the state property
           // Updates the data property
-          data: { ...current.data, itemList: current.data.itemList.slice() },
+          data: current.data ? [...current.data, result.data] : [result.data],
           error: null, // Resets the error property
         };
       } else {
@@ -75,12 +78,12 @@ async function handleCreate(dtoIn: NoteDto) {
     });
     return { ok: result.ok, error: result.ok ? undefined : result.data };
   }
-*/
+
 
 
   const value = {
     ...noteListDto,
-    // handlerMap: { ... }
+     handlerMap: { handleLoad, handleCreate },
   };
 
   return (

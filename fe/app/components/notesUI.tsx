@@ -9,7 +9,7 @@ import PendingItem from "./pendingItem";
 
 const NotesUI = () => {
   const context = useContext(NoteListContext);
-  const { state, data } = context ?? { state: "pending", data: [] };
+  const { state, data, handlerMap } = context ?? { state: "pending", data: [] };
   const [noteList, setNoteList] = useState<Note[]>([
     {
       id: "1",
@@ -78,6 +78,7 @@ const NotesUI = () => {
             {note.title}
           </Col>
         ))}
+
         <Button
           onClick={() => {
             createNote({
@@ -136,6 +137,18 @@ const NotesUI = () => {
               </Col>
             ))
           : null}
+
+        <Button
+          onClick={() => {
+            handlerMap?.handleCreate({
+              title: "Created Note",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Create
+        </Button>
       </Row>
     </>
   );
