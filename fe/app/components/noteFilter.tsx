@@ -11,8 +11,8 @@ interface NoteFilterProps {
 
 function NoteFilter({ onClose }: NoteFilterProps) {
   const context = useContext(NoteListContext);
-  const { handlerMap } = context ?? { state: "pending", data: [] };
-  const [sortOption, setSortOption] = useState<"asc" | "desc">("desc");
+  const { handlerMap, sort } = context ?? { state: "pending", data: [] };
+  //const [sortOption, setSortOption] = useState<"asc" | "desc">("desc");
 
   return (
     <Offcanvas onHide={onClose} show={true} placement="bottom" className="p-3">
@@ -21,9 +21,9 @@ function NoteFilter({ onClose }: NoteFilterProps) {
         <Button
           onClick={() => {
             handlerMap?.handleSortByDate("asc");
-            setSortOption("asc");
+            //setSortOption("asc");
           }}
-          disabled={sortOption === "asc"}
+          disabled={sort === "asc"}
         >
           Oldest to newest
         </Button>
@@ -31,9 +31,9 @@ function NoteFilter({ onClose }: NoteFilterProps) {
         <Button
           onClick={() => {
             handlerMap?.handleSortByDate("desc");
-            setSortOption("desc");
+            //setSortOption("desc");
           }}
-          disabled={sortOption === "desc"}
+          disabled={sort === "desc"}
         >
           Newest to Oldest
         </Button>

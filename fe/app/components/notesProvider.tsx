@@ -7,6 +7,7 @@ interface NoteListDto {
   state: "ready" | "pending" | "error";
   data: Note[] | null;
   error: any;
+  sort: "asc" | "desc"
   handlerMap?: {
     handleLoad: () => Promise<void>;
     handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
@@ -29,6 +30,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     state: "ready",
     data: null,
     error: null,
+    sort: "desc", // default sorting order
   });
 
   async function handleLoad() {
@@ -64,14 +66,21 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     const result = await FetchHelper.note.create(dtoIn);
     setNoteListDto((current) => {
       if (result.ok) {
-        //current?.data?.push(result.data);
-        // returns deep copy of current
+        let newData;
+        if (current.data) {
+          // If sort is "desc", newest first, add to start. If "asc", add to end.
+          newData =
+            current.sort === "desc"
+              ? [result.data, ...current.data]
+              : [...current.data, result.data];
+        } else {
+          newData = [result.data];
+        }
         return {
-          ...current, // Keeps all existing properties
-          state: "ready", // Updates the state property
-          // Updates the data property
-          data: current.data ? [...current.data, result.data] : [result.data],
-          error: null, // Resets the error property
+          ...current,
+          state: "ready",
+          data: newData,
+          error: null,
         };
       } else {
         // state needs to be ready on error or no data is shown
@@ -136,19 +145,25 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
 
   // asc = oldest to newest
   // desc = newest to oldest
-  async function handleSortByDate(sort: "asc" | "desc") {
+  async function handleSortByDate(newSort: "asc" | "desc" | null) {
+    // used when data sort gets out of sync because of create/update/delete
+    if (!newSort) {
+        newSort = noteListDto.sort;
+    }
     setNoteListDto((current) => {
       if (!current.data) return current;
       const sortedData = [...current.data].sort((a, b) =>
-        sort === "desc"
+        newSort === "desc"
           ? Date.parse(a.createdAt) > Date.parse(b.createdAt) ? -1 : 1
           : Date.parse(a.createdAt) > Date.parse(b.createdAt) ? 1 : -1
       );
       return {
         ...current,
         data: sortedData,
+        sort: newSort,
       };
     });
+    
   }
 
   const value = {
