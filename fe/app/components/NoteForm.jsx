@@ -25,7 +25,7 @@ function NoteForm({ item, onClose }) {
           const values = Object.fromEntries(formData);
           let result = null;
           if (item.id) {
-            result = await handlerMap.handleUpdate({ ...values, id: item.id });
+            result = await handlerMap.handleUpdate({ ...item, ...values, id: item.id });
           } else {
             result = await handlerMap.handleCreate({
               ...values,
