@@ -1,27 +1,30 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
-import FetchHelper from "../fetchHelper";
-import { Row, Col, Button, ButtonGroup } from "react-bootstrap";
-import { Note, NoteDto, noteState } from "../types";
+import { useState, useContext } from "react";
+import { Row, Col, Button } from "react-bootstrap";
+import { NoteDto } from "../types";
 
 import Icon from "@mdi/react";
-import { mdiRadioboxBlank, mdiRadioboxMarked, mdiSort } from "@mdi/js";
+import { mdiSort } from "@mdi/js";
 
 import { NoteListContext } from "./notesProvider";
 import PendingItem from "./pendingItem";
 import NoteForm from "./noteForm";
 import NoteFilter from "./noteFilter";
 import NoteDeleteForm from "./noteDeleteForm";
+import NoteUI from "./noteUI";
 
 const NotesUI = () => {
   const context = useContext(NoteListContext);
-  const { state, data, filter, handlerMap } = context ?? { state: "pending", data: [] };
+  const { state, data, filter, handlerMap } = context ?? {
+    state: "pending",
+    data: [],
+  };
   const [noteFormData, setNoteFormData] = useState<NoteDto | undefined>(
     undefined
   );
-  const [noteFormDeleteData, setNoteFormDeleteData] = useState<NoteDto | undefined>(
-    undefined
-  );
+  const [noteFormDeleteData, setNoteFormDeleteData] = useState<
+    NoteDto | undefined
+  >(undefined);
   const [showConfig, setShowConfig] = useState(false);
 
   return (
@@ -68,42 +71,10 @@ const NotesUI = () => {
         {state === "pending" ? <PendingItem /> : null}
 
         {state === "ready" && Array.isArray(data) && data?.length > 0
-          ? data?.map((note) => (
-            // render if note is allowed by filter
-            filter[note.state] ?
-              <Col 
-                sm="12"
-                className="d-flex justify-content-center my-2"
-                key={note.id}
-              >
-                <ButtonGroup key={note.id} className="w-100">
-                  <Button
-                    className="flex-grow-1 text-start"
-                    onClick={() => setNoteFormData(note)}
-                  >
-                    {note.title}
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      let newState: noteState =
-                        note.state === "unchecked" ? "checked" : "unchecked";
-                      handlerMap?.handleUpdate({ ...note, state: newState });
-                    }}
-                    className="flex-grow-0"
-                  >
-                    <Icon
-                      path={
-                        note.state === "unchecked"
-                          ? mdiRadioboxBlank
-                          : mdiRadioboxMarked
-                      }
-                      size={1}
-                    />
-                  </Button>
-                </ButtonGroup>
-              </Col>
-              : null
-            ))
+          ? data?.map((note) =>
+              // render if note is allowed by filter
+              filter[note.state] ? <NoteUI key={note.id} note={note} setNoteFormData={setNoteFormData} /> : null
+            )
           : null}
 
         {state === "ready" && Array.isArray(data) && data?.length === 0 ? (
