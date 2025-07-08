@@ -1,88 +1,39 @@
 {
   "notes": [
     {
-      "title": "dalsi First Note",
+      "title": "Nejnovejsi",
       "textDetail": "456",
       "id": "1",
-      "createdAt": "2025-10-02",
+      "createdAt": "2025-01-02",
       "state": "unchecked"
     },
     {
       "id": "2",
-      "title": "Second Note",
-      "createdAt": "2025-10-02",
+      "title": "Stará",
+      "createdAt": "2022-10-02",
       "textDetail": "",
-      "state": "checked"
+      "state": "unchecked"
     },
     {
       "id": "0654",
-      "title": "Changed Note",
+      "title": "Nová",
       "createdAt": "2023-10-01",
       "textDetail": "",
-      "state": "unchecked"
+      "state": "checked"
     },
     {
       "id": "8492",
-      "title": "Updated note",
-      "createdAt": "2023-10-02T12:00:00Z",
+      "title": "Nejstarsi",
+      "createdAt": "2021-10-02T12:00:00Z",
       "textDetail": "",
-      "state": "checked"
-    },
-    {
-      "id": "7bac",
-      "title": "Created Note",
-      "createdAt": "2023-10-02T12:00:00Z",
-      "textDetail": "",
-      "state": "checked"
-    },
-    {
-      "id": "34e1",
-      "title": "dalsi",
-      "textDetail": "123",
-      "createdAt": "2023-10-02T12:00:00Z",
       "state": "unchecked"
     },
     {
-      "id": "ce84",
-      "title": "Created Note",
-      "createdAt": "2023-10-02T12:00:00Z",
-      "textDetail": "123",
-      "state": "unchecked"
-    },
-    {
-      "id": "3ff9",
-      "title": "nova note",
-      "textDetail": "",
-      "createdAt": "",
-      "state": "checked"
-    },
-    {
-      "id": "13ea",
-      "title": "aaa",
-      "textDetail": "bbb",
-      "createdAt": "",
-      "state": "unchecked"
-    },
-    {
-      "id": "8b1d",
-      "title": "vc",
-      "textDetail": "cv",
-      "createdAt": "2025-07-08",
-      "state": "checked"
-    },
-    {
-      "id": "beae",
-      "title": "tr",
-      "textDetail": "rt",
-      "createdAt": "2025-07-08",
-      "state": "checked"
-    },
-    {
-      "id": "b006",
-      "title": "t",
+      "id": "fae3",
+      "title": "Ultra nejnovější",
       "textDetail": "",
       "createdAt": "2025-07-08",
-      "state": "checked"
+      "state": "unchecked"
     }
   ]
 }

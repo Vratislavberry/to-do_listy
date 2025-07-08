@@ -17,3 +17,5 @@ export interface NoteDto {
 
 // all possible methods for API calls
 export type Method = "get" | "post" | "put" | "delete";
+
+export type noteState = "checked" | "unchecked";

@@ -12,6 +12,7 @@ interface NoteListDto {
     handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleUpdate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleDelete: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
+    handleSortByDate: (sort: "asc" | "desc") => Promise<void>;
   };
 }
 
@@ -133,9 +134,32 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     return { ok: result.ok, error: result.ok ? undefined : result.data };
   }
 
+  // asc = oldest to newest
+  // desc = newest to oldest
+  async function handleSortByDate(sort: "asc" | "desc") {
+    setNoteListDto((current) => {
+      if (!current.data) return current;
+      const sortedData = [...current.data].sort((a, b) =>
+        sort === "desc"
+          ? Date.parse(a.createdAt) > Date.parse(b.createdAt) ? -1 : 1
+          : Date.parse(a.createdAt) > Date.parse(b.createdAt) ? 1 : -1
+      );
+      return {
+        ...current,
+        data: sortedData,
+      };
+    });
+  }
+
   const value = {
     ...noteListDto,
-    handlerMap: { handleLoad, handleCreate, handleUpdate, handleDelete },
+    handlerMap: {
+      handleLoad,
+      handleCreate,
+      handleUpdate,
+      handleDelete,
+      handleSortByDate,
+    },
   };
 
   return (
