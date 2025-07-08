@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
 
 import { NoteListContext } from "./notesProvider";
 import { NoteDto } from "../types";
@@ -11,9 +12,10 @@ import { NoteDto } from "../types";
 interface NoteFormProps {
   onClose: () => void;
   item: NoteDto;
+  setNoteFormDeleteData: (item: NoteDto | undefined) => void;
 }
 
-function NoteForm({ item, onClose }: NoteFormProps) {
+function NoteForm({ item, onClose, setNoteFormDeleteData }: NoteFormProps) {
   const context = useContext(NoteListContext);
   const { state, handlerMap } = context ?? { state: "pending", data: [] };
   const [errorState, setErrorState] = useState<any>();
@@ -33,7 +35,11 @@ function NoteForm({ item, onClose }: NoteFormProps) {
           const values = Object.fromEntries(formData);
           let result = null;
           if (item.id) {
-            result = await handlerMap?.handleUpdate({ ...item, ...values, id: item.id });
+            result = await handlerMap?.handleUpdate({
+              ...item,
+              ...values,
+              id: item.id,
+            });
           } else {
             result = await handlerMap?.handleCreate({
               ...values,
@@ -77,21 +83,40 @@ function NoteForm({ item, onClose }: NoteFormProps) {
             <Alert variant={"danger"}>{errorState?.note?.message}</Alert>
           ) : null}
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={onClose}
-            disabled={state === "pending"}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={state === "pending"}
-          >
-            {item.id ? "Edit" : "Create"}
-          </Button>
+        <Modal.Footer className="d-flex justify-content-between">
+          <Col>
+            {item.id ? (
+              <Button
+                className="self-align-start"
+                variant="danger"
+                onClick={() => {
+                  setNoteFormDeleteData(item);
+                  onClose();
+                  
+                }}
+                disabled={state === "pending"}
+              >
+                Delete
+              </Button>
+            ) : null}
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              variant="secondary"
+              onClick={onClose}
+              disabled={state === "pending"}
+              className="mx-2"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={state === "pending"}
+            >
+              {item.id ? "Edit" : "Create"}
+            </Button>
+          </Col>
         </Modal.Footer>
       </Form>
     </Modal>

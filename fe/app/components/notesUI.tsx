@@ -11,11 +11,15 @@ import { NoteListContext } from "./notesProvider";
 import PendingItem from "./pendingItem";
 import NoteForm from "./noteForm";
 import NoteFilter from "./noteFilter";
+import NoteDeleteForm from "./noteDeleteForm";
 
 const NotesUI = () => {
   const context = useContext(NoteListContext);
   const { state, data, filter, handlerMap } = context ?? { state: "pending", data: [] };
   const [noteFormData, setNoteFormData] = useState<NoteDto | undefined>(
+    undefined
+  );
+  const [noteFormDeleteData, setNoteFormDeleteData] = useState<NoteDto | undefined>(
     undefined
   );
   const [showConfig, setShowConfig] = useState(false);
@@ -31,6 +35,14 @@ const NotesUI = () => {
           <NoteForm
             item={noteFormData}
             onClose={() => setNoteFormData(undefined)}
+            setNoteFormDeleteData={setNoteFormDeleteData}
+          />
+        ) : null}
+
+        {!!noteFormDeleteData ? (
+          <NoteDeleteForm
+            item={noteFormDeleteData}
+            onClose={() => setNoteFormDeleteData(undefined)}
           />
         ) : null}
 
