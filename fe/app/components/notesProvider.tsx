@@ -10,6 +10,7 @@ interface NoteListDto {
   handlerMap?: {
     handleLoad: () => Promise<void>;
     handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
+    handleUpdate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
   };
 }
 
@@ -79,11 +80,43 @@ async function handleCreate(dtoIn: NoteDto) {
     return { ok: result.ok, error: result.ok ? undefined : result.data };
   }
 
+  
+  async function handleUpdate(dtoIn: NoteDto) {
+    setNoteListDto((current) => {
+      return { ...current, state: "pending", pendingId: dtoIn.id };
+    });
+    const result = await FetchHelper.note.update(dtoIn);
+    // finding index of updated item in the list
+    setNoteListDto((current) => {
+      if (result.ok && current.data) {
+        const updatedData = current.data.map((item) =>
+          item.id === dtoIn.id ? { ...item, ...dtoIn } : item
+        );
+        return {
+          ...current,
+          state: "ready",
+          data: updatedData,
+          error: null,
+          pendingId: undefined,
+        };
+      } else {
+        // state needs to be ready on error or no data is shown
+        return {
+          ...current,
+          state: "ready",
+          error: result.data,
+          pendingId: undefined,
+        };
+      }
+    });
+    return { ok: result.ok, error: result.ok ? undefined : result.data };
+  }
+
 
 
   const value = {
     ...noteListDto,
-     handlerMap: { handleLoad, handleCreate },
+     handlerMap: { handleLoad, handleCreate, handleUpdate },
   };
 
   return (

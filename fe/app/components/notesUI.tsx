@@ -149,6 +149,19 @@ const NotesUI = () => {
         >
           Create
         </Button>
+
+                <Button
+          onClick={() => {
+            handlerMap?.handleUpdate({
+              id: "8492",
+              title: "Updated note",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Update
+        </Button>
       </Row>
     </>
   );
