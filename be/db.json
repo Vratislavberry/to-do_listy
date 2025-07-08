@@ -5,7 +5,7 @@
       "title": "a",
       "textDetail": "f",
       "createdAt": "2025-07-08T14:45:07.462Z",
-      "state": "checked"
+      "state": "unchecked"
     },
     {
       "id": "337a",
@@ -19,7 +19,7 @@
       "title": "ctvrta",
       "textDetail": "",
       "createdAt": "2025-07-08T14:45:35.085Z",
-      "state": "checked"
+      "state": "unchecked"
     },
     {
       "id": "9120",
@@ -33,14 +33,14 @@
       "title": "dalsi 2",
       "textDetail": "klm",
       "createdAt": "2025-07-08T18:09:53.854Z",
-      "state": "unchecked"
+      "state": "checked"
     },
     {
       "id": "a50a",
       "title": "aaa",
       "textDetail": "",
       "createdAt": "2025-07-08T18:47:12.654Z",
-      "state": "unchecked"
+      "state": "checked"
     }
   ]
 }

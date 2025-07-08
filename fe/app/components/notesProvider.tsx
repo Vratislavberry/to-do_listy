@@ -7,13 +7,15 @@ interface NoteListDto {
   state: "ready" | "pending" | "error";
   data: Note[] | null;
   error: any;
-  sort: "asc" | "desc"
+  sort: "asc" | "desc";
+  filter: { checked: boolean; unchecked: boolean };
   handlerMap?: {
     handleLoad: () => Promise<void>;
     handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleUpdate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleDelete: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleSortByDate: (sort: "asc" | "desc") => Promise<void>;
+    handleFilterChange: (key: "checked" | "unchecked", value: boolean) => Promise<void>;
   };
 }
 
@@ -31,6 +33,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     data: null,
     error: null,
     sort: "desc", // default sorting order
+    filter: { checked: true, unchecked: true },
   });
 
   async function handleLoad() {
@@ -148,14 +151,18 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
   async function handleSortByDate(newSort: "asc" | "desc" | null) {
     // used when data sort gets out of sync because of create/update/delete
     if (!newSort) {
-        newSort = noteListDto.sort;
+      newSort = noteListDto.sort;
     }
     setNoteListDto((current) => {
       if (!current.data) return current;
       const sortedData = [...current.data].sort((a, b) =>
         newSort === "desc"
-          ? Date.parse(a.createdAt) > Date.parse(b.createdAt) ? -1 : 1
-          : Date.parse(a.createdAt) > Date.parse(b.createdAt) ? 1 : -1
+          ? Date.parse(a.createdAt) > Date.parse(b.createdAt)
+            ? -1
+            : 1
+          : Date.parse(a.createdAt) > Date.parse(b.createdAt)
+          ? 1
+          : -1
       );
       return {
         ...current,
@@ -163,7 +170,16 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
         sort: newSort,
       };
     });
-    
+  }
+
+  async function handleFilterChange(
+    key: "checked" | "unchecked",
+    value: boolean
+  ) {
+    setNoteListDto((current) => ({
+      ...current,
+      filter: { ...current.filter, [key]: value },
+    }));
   }
 
   const value = {
@@ -174,6 +190,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
       handleUpdate,
       handleDelete,
       handleSortByDate,
+      handleFilterChange,
     },
   };
 

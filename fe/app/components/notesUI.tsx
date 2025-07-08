@@ -14,7 +14,7 @@ import NoteFilter from "./noteFilter";
 
 const NotesUI = () => {
   const context = useContext(NoteListContext);
-  const { state, data, handlerMap } = context ?? { state: "pending", data: [] };
+  const { state, data, filter, handlerMap } = context ?? { state: "pending", data: [] };
   const [noteFormData, setNoteFormData] = useState<NoteDto | undefined>(
     undefined
   );
@@ -57,7 +57,9 @@ const NotesUI = () => {
 
         {state === "ready" && Array.isArray(data) && data?.length > 0
           ? data?.map((note) => (
-              <Col
+            // render if note is allowed by filter
+            filter[note.state] ?
+              <Col 
                 sm="12"
                 className="d-flex justify-content-center my-2"
                 key={note.id}
@@ -88,6 +90,7 @@ const NotesUI = () => {
                   </Button>
                 </ButtonGroup>
               </Col>
+              : null
             ))
           : null}
 
