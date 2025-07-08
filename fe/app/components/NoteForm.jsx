@@ -11,6 +11,16 @@ function NoteForm({ item, onClose }) {
   const { state, handlerMap } = useContext(NoteListContext);
   const [errorState, setErrorState] = useState();
 
+
+  // gets current date in format YYYY-MM-DD
+   function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   return (
     <Modal show={true} onHide={onClose}>
       <Form
@@ -27,7 +37,7 @@ function NoteForm({ item, onClose }) {
           if (item.id) {
             result = await handlerMap.handleUpdate({ ...values, id: item.id });
           } else {
-            result = await handlerMap.handleCreate({ ...values, createdAt:"" ,state: "unchecked" });
+            result = await handlerMap.handleCreate({ ...values, createdAt:getCurrentDate() ,state: "unchecked" });
           }
 
           if (result.ok) {
