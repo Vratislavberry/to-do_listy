@@ -27,7 +27,7 @@ function NoteForm({ item, onClose }) {
           if (item.id) {
             result = await handlerMap.handleUpdate({ ...values, id: item.id });
           } else {
-            result = await handlerMap.handleCreate({ ...values });
+            result = await handlerMap.handleCreate({ ...values, createdAt:"" ,state: "unchecked" });
           }
 
           if (result.ok) {

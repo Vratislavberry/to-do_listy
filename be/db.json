@@ -3,14 +3,16 @@
     {
       "title": "dalsi First Note",
       "textDetail": "456",
-      "id": "1"
+      "id": "1",
+      "createdAt": "2025-10-02",
+      "state": "unchecked"
     },
     {
       "id": "2",
       "title": "Second Note",
       "createdAt": "2025-10-02",
       "textDetail": "",
-      "state": "unchecked"
+      "state": "checked"
     },
     {
       "id": "0654",
@@ -24,19 +26,42 @@
       "title": "Updated note",
       "createdAt": "2023-10-02T12:00:00Z",
       "textDetail": "",
-      "state": "unchecked"
+      "state": "checked"
     },
     {
       "id": "7bac",
       "title": "Created Note",
       "createdAt": "2023-10-02T12:00:00Z",
       "textDetail": "",
-      "state": "unchecked"
+      "state": "checked"
     },
     {
       "id": "34e1",
       "title": "dalsi",
-      "textDetail": "123"
+      "textDetail": "123",
+      "createdAt": "2023-10-02T12:00:00Z",
+      "state": "unchecked"
+    },
+    {
+      "id": "ce84",
+      "title": "Created Note",
+      "createdAt": "2023-10-02T12:00:00Z",
+      "textDetail": "123",
+      "state": "unchecked"
+    },
+    {
+      "id": "3ff9",
+      "title": "nova note",
+      "textDetail": "",
+      "createdAt": "",
+      "state": "checked"
+    },
+    {
+      "id": "13ea",
+      "title": "aaa",
+      "textDetail": "bbb",
+      "createdAt": "",
+      "state": "unchecked"
     }
   ]
 }

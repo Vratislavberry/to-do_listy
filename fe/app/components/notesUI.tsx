@@ -4,6 +4,9 @@ import FetchHelper from "../fetchHelper";
 import { Row, Col, Button, ButtonGroup } from "react-bootstrap";
 import { Note, NoteDto } from "../types";
 
+import Icon from "@mdi/react";
+import { mdiRadioboxBlank, mdiRadioboxMarked } from "@mdi/js";
+
 import { NoteListContext } from "./notesProvider";
 import PendingItem from "./pendingItem";
 import NoteForm from "./NoteForm";
@@ -52,46 +55,18 @@ const NotesUI = () => {
                   >
                     {note.title}
                   </Button>
-                  <Button className="flex-grow-0">Check</Button>
+                  <Button
+                    onClick={() =>
+                      handlerMap?.handleUpdate({ ...note, state: "checked" })
+                    }
+                    className="flex-grow-0"
+                  >
+                    <Icon path={note.state === "unchecked" ? mdiRadioboxBlank : mdiRadioboxMarked} size={1} />
+                  </Button>
                 </ButtonGroup>
               </Col>
             ))
           : null}
-
-        <Button
-          onClick={() => {
-            handlerMap?.handleCreate({
-              title: "Created Note",
-              createdAt: "2023-10-02T12:00:00Z",
-            });
-          }}
-        >
-          Create
-        </Button>
-
-        <Button
-          onClick={() => {
-            handlerMap?.handleUpdate({
-              id: "a051",
-              title: "another one",
-              createdAt: "2023-10-02T12:00:00Z",
-            });
-          }}
-        >
-          Update
-        </Button>
-
-        <Button
-          onClick={() => {
-            handlerMap?.handleDelete({
-              id: "a051",
-              title: "Updated note",
-              createdAt: "2023-10-02T12:00:00Z",
-            });
-          }}
-        >
-          Delete
-        </Button>
       </Row>
     </>
   );
