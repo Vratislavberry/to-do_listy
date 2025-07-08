@@ -2,7 +2,8 @@ export interface Note {
   id: string;
   title: string;
   createdAt: string;
-  updatedAt: string;
+  textDetail: string;
+  state: "checked" | "unchecked";
 }
 
 // note with optional properties
@@ -10,7 +11,8 @@ export interface NoteDto {
   id?: string;
   title?: string;
   createdAt?: string;
-  updatedAt?: string;
+  textDetail?: string;
+  state?: "checked" | "unchecked";
 }
 
 // all possible methods for API calls

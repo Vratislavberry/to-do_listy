@@ -7,7 +7,6 @@ import Alert from "react-bootstrap/Alert";
 
 import { NoteListContext } from "./notesProvider";
 
-
 function NoteForm({ item, onClose }) {
   const { state, handlerMap } = useContext(NoteListContext);
   const [errorState, setErrorState] = useState();
@@ -25,17 +24,16 @@ function NoteForm({ item, onClose }) {
           // extracts data from Modal form
           const values = Object.fromEntries(formData);
           let result = null;
-          if (item.id){
-            result = await handlerMap.handleUpdate({...values, id: item.id});
-          }
-          else{
+          if (item.id) {
+            result = await handlerMap.handleUpdate({ ...values, id: item.id });
+          } else {
             result = await handlerMap.handleCreate({ ...values });
           }
 
           if (result.ok) {
             onClose();
           } else {
-            setErrorState(result.error)
+            setErrorState(result.error);
           }
         }}
       >
@@ -53,10 +51,19 @@ function NoteForm({ item, onClose }) {
             maxLength={50}
           />
 
+          <Form.Label>Details</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            name="textDetail"
+            disabled={state === "pending"}
+            defaultValue={item.textDetail}
+            maxLength={250}
+          />
+
           {!!errorState?.note?.message ? (
-          <Alert variant={"danger"}>{errorState.note.message}</Alert>
-        ) : null}
-        
+            <Alert variant={"danger"}>{errorState.note.message}</Alert>
+          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button

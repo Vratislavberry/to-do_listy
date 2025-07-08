@@ -59,8 +59,7 @@ const NotesUI = () => {
           onClick={() => {
             handlerMap?.handleCreate({
               title: "Created Note",
-              createdAt: "2023-10-02T12:00:00Z",
-              updatedAt: "2023-10-02T12:00:00Z",
+              createdAt: "2023-10-02T12:00:00Z"
             });
           }}
         >
@@ -72,8 +71,7 @@ const NotesUI = () => {
             handlerMap?.handleUpdate({
               id: "a051",
               title: "another one",
-              createdAt: "2023-10-02T12:00:00Z",
-              updatedAt: "2023-10-02T12:00:00Z",
+              createdAt: "2023-10-02T12:00:00Z"
             });
           }}
         >
@@ -85,8 +83,7 @@ const NotesUI = () => {
             handlerMap?.handleDelete({
               id: "a051",
               title: "Updated note",
-              createdAt: "2023-10-02T12:00:00Z",
-              updatedAt: "2023-10-02T12:00:00Z",
+              createdAt: "2023-10-02T12:00:00Z"
             });
           }}
         >

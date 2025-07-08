@@ -4,48 +4,41 @@
       "id": "1",
       "title": "First Note",
       "createdAt": "2021-10-01",
-      "updatedAt": "2021-10-01"
+      "textDetail": "",
+      "state": "unchecked"
     },
     {
       "id": "2",
       "title": "Second Note",
       "createdAt": "2025-10-02",
-      "updatedAt": "2025-10-02"
+      "textDetail": "",
+      "state": "unchecked"
     },
     {
+      "id": "0654",
       "title": "Changed Note",
       "createdAt": "2023-10-01",
-      "updatedAt": "2023-10-01",
-      "id": "0654"
+      "textDetail": "",
+      "state": "unchecked"
     },
     {
       "id": "8492",
       "title": "Updated note",
       "createdAt": "2023-10-02T12:00:00Z",
-      "updatedAt": "2023-10-02T12:00:00Z"
+      "textDetail": "",
+      "state": "unchecked"
     },
     {
       "id": "7bac",
       "title": "Created Note",
       "createdAt": "2023-10-02T12:00:00Z",
-      "updatedAt": "2023-10-02T12:00:00Z"
-    }
-  ],
-  "entries": [
-    {
-      "id": "1",
-      "noteId": 1,
-      "content": "This is the first entry in the first note."
+      "textDetail": "",
+      "state": "unchecked"
     },
     {
-      "id": "2",
-      "noteId": 1,
-      "content": "This is the second entry in the first note."
-    },
-    {
-      "id": "3",
-      "noteId": 2,
-      "content": "This is the first entry in the second note."
+      "id": "34e1",
+      "title": "dalsi",
+      "textDetail": "123"
     }
   ]
 }
