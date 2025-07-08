@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { Note, NoteDto} from "../types";
+import { Note, NoteDto } from "../types";
 import FetchHelper from "../fetchHelper";
 
 interface NoteListDto {
@@ -11,6 +11,7 @@ interface NoteListDto {
     handleLoad: () => Promise<void>;
     handleCreate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
     handleUpdate: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
+    handleDelete: (dtoIn: NoteDto) => Promise<{ ok: boolean; error?: any }>;
   };
 }
 
@@ -55,8 +56,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     handleLoad();
   }, []);
 
-
-async function handleCreate(dtoIn: NoteDto) {
+  async function handleCreate(dtoIn: NoteDto) {
     setNoteListDto((current) => {
       return { ...current, state: "pending" };
     });
@@ -80,7 +80,6 @@ async function handleCreate(dtoIn: NoteDto) {
     return { ok: result.ok, error: result.ok ? undefined : result.data };
   }
 
-  
   async function handleUpdate(dtoIn: NoteDto) {
     setNoteListDto((current) => {
       return { ...current, state: "pending", pendingId: dtoIn.id };
@@ -112,11 +111,31 @@ async function handleCreate(dtoIn: NoteDto) {
     return { ok: result.ok, error: result.ok ? undefined : result.data };
   }
 
-
+  async function handleDelete(dtoIn: NoteDto) {
+    setNoteListDto((current) => {
+      return { ...current, state: "pending", pendingId: dtoIn.id };
+    });
+    const result = await FetchHelper.note.delete(dtoIn);
+    setNoteListDto((current) => {
+      if (result.ok && current.data) {
+        const updatedData = current.data.filter((item) => item.id !== dtoIn.id);
+        return {
+          ...current,
+          state: "ready",
+          data: updatedData,
+          error: null,
+        };
+      } else {
+        // state needs to be ready on error or no data is shown
+        return { ...current, state: "ready", error: result.data };
+      }
+    });
+    return { ok: result.ok, error: result.ok ? undefined : result.data };
+  }
 
   const value = {
     ...noteListDto,
-     handlerMap: { handleLoad, handleCreate, handleUpdate },
+    handlerMap: { handleLoad, handleCreate, handleUpdate, handleDelete },
   };
 
   return (

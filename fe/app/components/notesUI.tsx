@@ -150,7 +150,7 @@ const NotesUI = () => {
           Create
         </Button>
 
-                <Button
+        <Button
           onClick={() => {
             handlerMap?.handleUpdate({
               id: "8492",
@@ -161,6 +161,19 @@ const NotesUI = () => {
           }}
         >
           Update
+        </Button>
+
+        <Button
+          onClick={() => {
+            handlerMap?.handleDelete({
+              id: "408c",
+              title: "Updated note",
+              createdAt: "2023-10-02T12:00:00Z",
+              updatedAt: "2023-10-02T12:00:00Z",
+            });
+          }}
+        >
+          Delete
         </Button>
       </Row>
     </>
