@@ -49,7 +49,6 @@ const NotesUI = () => {
           />
         ) : null}
 
-        <h1 className="text-center my-3">Notes</h1>
 
         <Col className="d-flex justify-content-end my-2">
           <Button variant="success" onClick={() => setShowConfig(true)}>
