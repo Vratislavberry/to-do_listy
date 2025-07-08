@@ -14,17 +14,21 @@ const NotesUI = () => {
   return (
     <>
       <Row>
+        <h1 className="text-center my-3">Notes</h1>
+        <Col sm="12" className="my-2">
+        <Button variant="success" className="w-100 text-start">Create new note</Button>
+        </Col>
         {state === "pending" ? <PendingItem /> : null}
 
         {state === "ready"
           ? data?.map((note) => (
               <Col
                 sm="12"
-                className="d-flex justify-content-center text-center my-2"
+                className="d-flex justify-content-center my-2"
                 key={note.id}
               >
                 <ButtonGroup key={note.id} className="w-100">
-                  <Button className="flex-grow-1">{note.title}</Button>
+                  <Button className="flex-grow-1 text-start">{note.title}</Button>
                   <Button className="flex-grow-0">Check</Button>
                 </ButtonGroup>
               </Col>
