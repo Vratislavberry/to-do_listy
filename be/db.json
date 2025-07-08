@@ -1,11 +1,9 @@
 {
   "notes": [
     {
-      "id": "1",
-      "title": "First Note",
-      "createdAt": "2021-10-01",
-      "textDetail": "",
-      "state": "unchecked"
+      "title": "dalsi First Note",
+      "textDetail": "456",
+      "id": "1"
     },
     {
       "id": "2",

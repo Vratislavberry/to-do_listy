@@ -30,7 +30,7 @@ const NotesUI = () => {
           <Button
             variant="success"
             className="w-100 text-start"
-            disabled={(state === "pending")}
+            disabled={state === "pending"}
             onClick={() => setNoteFormData({})}
           >
             Create new note
@@ -46,7 +46,10 @@ const NotesUI = () => {
                 key={note.id}
               >
                 <ButtonGroup key={note.id} className="w-100">
-                  <Button className="flex-grow-1 text-start">
+                  <Button
+                    className="flex-grow-1 text-start"
+                    onClick={() => setNoteFormData(note)}
+                  >
                     {note.title}
                   </Button>
                   <Button className="flex-grow-0">Check</Button>
@@ -59,7 +62,7 @@ const NotesUI = () => {
           onClick={() => {
             handlerMap?.handleCreate({
               title: "Created Note",
-              createdAt: "2023-10-02T12:00:00Z"
+              createdAt: "2023-10-02T12:00:00Z",
             });
           }}
         >
@@ -71,7 +74,7 @@ const NotesUI = () => {
             handlerMap?.handleUpdate({
               id: "a051",
               title: "another one",
-              createdAt: "2023-10-02T12:00:00Z"
+              createdAt: "2023-10-02T12:00:00Z",
             });
           }}
         >
@@ -83,7 +86,7 @@ const NotesUI = () => {
             handlerMap?.handleDelete({
               id: "a051",
               title: "Updated note",
-              createdAt: "2023-10-02T12:00:00Z"
+              createdAt: "2023-10-02T12:00:00Z",
             });
           }}
         >
