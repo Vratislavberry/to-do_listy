@@ -20,7 +20,6 @@ const NotesUI = () => {
   );
   const [showConfig, setShowConfig] = useState(false);
 
-
   return (
     <>
       <Row>
@@ -56,7 +55,7 @@ const NotesUI = () => {
         <hr />
         {state === "pending" ? <PendingItem /> : null}
 
-        {state === "ready"
+        {state === "ready" && Array.isArray(data) && data?.length > 0
           ? data?.map((note) => (
               <Col
                 sm="12"
@@ -91,6 +90,10 @@ const NotesUI = () => {
               </Col>
             ))
           : null}
+
+        {state === "ready" && Array.isArray(data) && data?.length === 0 ? (
+          <p>There are no notes...</p>
+        ) : null}
       </Row>
     </>
   );
