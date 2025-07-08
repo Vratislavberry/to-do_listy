@@ -6,10 +6,17 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 
 import { NoteListContext } from "./notesProvider";
+import { NoteDto } from "../types";
 
-function NoteForm({ item, onClose }) {
-  const { state, handlerMap } = useContext(NoteListContext);
-  const [errorState, setErrorState] = useState();
+interface NoteFormProps {
+  onClose: () => void;
+  item: NoteDto;
+}
+
+function NoteForm({ item, onClose }: NoteFormProps) {
+  const context = useContext(NoteListContext);
+  const { state, handlerMap } = context ?? { state: "pending", data: [] };
+  const [errorState, setErrorState] = useState<any>();
 
   return (
     <Modal show={true} onHide={onClose}>
@@ -20,24 +27,25 @@ function NoteForm({ item, onClose }) {
           // stops propagation of submit event to parent components
           // in some cases it can trigger another submit event.
           e.stopPropagation();
-          const formData = new FormData(e.target);
+          const form = e.target as HTMLFormElement;
+          const formData = new FormData(form);
           // extracts data from Modal form
           const values = Object.fromEntries(formData);
           let result = null;
           if (item.id) {
-            result = await handlerMap.handleUpdate({ ...item, ...values, id: item.id });
+            result = await handlerMap?.handleUpdate({ ...item, ...values, id: item.id });
           } else {
-            result = await handlerMap.handleCreate({
+            result = await handlerMap?.handleCreate({
               ...values,
               createdAt: new Date().toISOString(),
               state: "unchecked",
             });
           }
 
-          if (result.ok) {
+          if (result?.ok) {
             onClose();
           } else {
-            setErrorState(result.error);
+            setErrorState(result?.error);
           }
         }}
       >
@@ -66,7 +74,7 @@ function NoteForm({ item, onClose }) {
           />
 
           {!!errorState?.note?.message ? (
-            <Alert variant={"danger"}>{errorState.note.message}</Alert>
+            <Alert variant={"danger"}>{errorState?.note?.message}</Alert>
           ) : null}
         </Modal.Body>
         <Modal.Footer>

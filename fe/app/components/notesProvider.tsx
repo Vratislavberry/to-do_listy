@@ -27,7 +27,7 @@ interface NotesProviderProps {
 
 const NotesProvider = ({ children }: NotesProviderProps) => {
   const [noteListDto, setNoteListDto] = useState<NoteListDto>({
-    state: "ready",
+    state: "pending",
     data: null,
     error: null,
     sort: "desc", // default sorting order

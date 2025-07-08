@@ -9,7 +9,7 @@ import { mdiRadioboxBlank, mdiRadioboxMarked, mdiSort } from "@mdi/js";
 
 import { NoteListContext } from "./notesProvider";
 import PendingItem from "./pendingItem";
-import NoteForm from "./NoteForm";
+import NoteForm from "./noteForm";
 import NoteFilter from "./noteFilter";
 
 const NotesUI = () => {
