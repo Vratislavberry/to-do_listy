@@ -1,24 +1,17 @@
 {
   "notes": [
     {
-      "id": "e818",
-      "title": "Oldest",
-      "textDetail": "my details",
-      "createdAt": "2025-07-08T21:56:19.401Z",
+      "id": "fdf0",
+      "title": "Druhá  2",
+      "textDetail": "345 678",
+      "createdAt": "2025-07-09T08:30:28.586Z",
       "state": "unchecked"
     },
     {
-      "id": "122b",
-      "title": "Third one 1",
-      "textDetail": "fa",
-      "createdAt": "2025-07-08T21:56:53.568Z",
-      "state": "unchecked"
-    },
-    {
-      "id": "311f",
-      "title": "a",
-      "textDetail": "b",
-      "createdAt": "2025-07-08T22:09:04.649Z",
+      "id": "1566",
+      "title": "Čtvrtá poznámka ",
+      "textDetail": "",
+      "createdAt": "2025-07-09T10:26:20.604Z",
       "state": "unchecked"
     }
   ]

@@ -1,9 +1,8 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import { ButtonGroup } from "react-bootstrap";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { NoteListContext } from "./notesProvider";
-import { NoteDto } from "../types";
 
 interface NoteFilterProps {
   onClose: () => void;

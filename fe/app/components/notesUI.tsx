@@ -49,9 +49,12 @@ const NotesUI = () => {
           />
         ) : null}
 
-
         <Col className="d-flex justify-content-end my-2">
-          <Button variant="success" onClick={() => setShowConfig(true)}>
+          <Button
+            variant="success"
+            onClick={() => setShowConfig(true)}
+            disabled={state === "pending"}
+          >
             <Icon path={mdiSort} size={1} />
           </Button>
         </Col>
@@ -72,7 +75,13 @@ const NotesUI = () => {
         {state === "ready" && Array.isArray(data) && data?.length > 0
           ? data?.map((note) =>
               // render if note is allowed by filter
-              filter[note.state] ? <NoteUI key={note.id} note={note} setNoteFormData={setNoteFormData} /> : null
+              filter[note.state] ? (
+                <NoteUI
+                  key={note.id}
+                  note={note}
+                  setNoteFormData={setNoteFormData}
+                />
+              ) : null
             )
           : null}
 
