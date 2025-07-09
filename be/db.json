@@ -1,17 +1,31 @@
 {
   "notes": [
     {
-      "id": "fdf0",
-      "title": "Druhá  2",
-      "textDetail": "345 678",
-      "createdAt": "2025-07-09T08:30:28.586Z",
+      "id": "f18e",
+      "title": "Grocery List",
+      "textDetail": "Buy milk, eggs and bread",
+      "createdAt": "2025-07-09T11:34:09.462Z",
       "state": "unchecked"
     },
     {
-      "id": "1566",
-      "title": "Čtvrtá poznámka ",
-      "textDetail": "",
-      "createdAt": "2025-07-09T10:26:20.604Z",
+      "id": "64da",
+      "title": "Weekend Chores",
+      "textDetail": "Clean kitchen, vacuum living room and do laundry.",
+      "createdAt": "2025-07-09T11:34:22.539Z",
+      "state": "unchecked"
+    },
+    {
+      "id": "4bae",
+      "title": "Study schedule for math exam",
+      "textDetail": "Revise chapters 3–5",
+      "createdAt": "2025-07-09T11:34:39.580Z",
+      "state": "unchecked"
+    },
+    {
+      "id": "a168",
+      "title": "Study schedule for english exam",
+      "textDetail": "Revise vocabulary",
+      "createdAt": "2025-07-09T11:35:04.476Z",
       "state": "unchecked"
     }
   ]
